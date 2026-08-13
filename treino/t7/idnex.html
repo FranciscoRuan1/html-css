@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Criador de Portfólio</title>
+  <style>
+    body {
+      background: #f5f0d8;
+      color: #111;
+      font-family: Arial, sans-serif;
+      margin:  2px   3px  4px    5px ;
+      padding: 10px;
+    }
+
+    body.dark {
+      background: #222;
+      color: #fff;
+    }
+
+    .caixa {
+      border: 4px solid #000;
+      padding:  8px   10px   12px   14px ;
+      margin:  3px  4px   5px   6px ;
+      background: #fff;
+    }
+
+    body.dark .caixa {
+      background: #333;
+      border-color: #fff;
+    }
+
+    .container {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: flex-start;
+    }
+
+    .painel {
+      width:  46% ;
+      min-width: 300px;
+      background: #f7f0aa;
+      padding:  15px  20px  25px  30px ;
+      border: 5px dashed #444;
+      margin-top: 10px;
+    }
+
+    body.dark .painel {
+      background: #444;
+      border-color: #eee;
+    }
+
+    .preview {
+      width:  46% ;
+      min-width: 300px;
+      background: #fefefe;
+      padding: 15px;
+      border: 3px dotted #333;
+      margin-top: 10px;
+    }
+
+    body.dark .preview {
+      background: #2b2b2b;
+      border-color: #ddd;
+    }
+
+    input, textarea, button {
+      width: 100%;
+      margin-top: 5px;
+      margin-bottom: 8px;
+      padding: 6px;
+      box-sizing: border-box;
+      border: 2px solid #111;
+      font-size: 14px;
+    }
+
+    button {
+      cursor: pointer;
+      background: #ffcc00;
+      border-radius: 0;
+      font-weight: bold;
+    }
+
+    .titulo {
+      text-align: center;
+      font-size: 24px;
+      margin-bottom: 10px;
+      background: #ff6666;
+      padding: 5px;
+      border: 2px solid #000;
+    }
+
+    .linha {
+      height: 3px;
+      background: #000;
+      margin: 10px 0;
+    }
+
+    body.dark .linha {
+      background: #fff;
+    }
+
+    .mini {
+      font-size: 12px;
+      margin-top: 4px;
+    }
+  </style>
+</head>
+<body class="light">
+  <div class="caixa">
+    <h1 class="titulo">CRIADOR DE PORTIFOLIO</h1>
+
+    <button id="themeBtn">MUDAR PARA DARK/LIGHT</button>
+
+    <div class="linha"></div>
+
+    <div class="container">
+      <div class="painel">
+        <h3>FORMULÁRIO</h3>
+
+        <label>Nome</label>
+        <input id="name" value="Seu Nome" />
+
+        <label>Título</label>
+        <input id="title" value="Desenvolvedor Web" />
+
+        <label>Sobre você</label>
+        <textarea id="about" rows="4">Eu adoro fazer coisas legais com HTML, CSS e JavaScript.</textarea>
+
+        <label>Habilidades</label>
+        <textarea id="skills" rows="4">HTML
+CSS
+JavaScript
+Photoshop</textarea>
+
+        <label>Projetos</label>
+        <textarea id="projects" rows="4">Projeto 1
+Projeto 2
+Projeto 3</textarea>
+
+        <label>E-mail</label>
+        <input id="email" value="seuemail@email.com" />
+
+        <label>GitHub</label>
+        <input id="github" value="github.com/seuusuario" />
+
+        <button id="clearBtn">LIMPAR TUDO</button>
+      </div>
+
+      <div class="preview">
+        <h3>PREVIEW DO PORTFÓLIO</h3>
+        <div class="linha"></div>
+
+        <h2 id="previewName">Seu Nome</h2>
+        <p id="previewTitle"><strong>Desenvolvedor Web</strong></p>
+
+        <h4>Sobre mim</h4>
+        <p id="previewAbout">Eu adoro fazer coisas legais com HTML, CSS e JavaScript.</p>
+
+        <h4>Habilidades</h4>
+        <ul id="previewSkills">
+          <li>HTML</li>
+          <li>CSS</li>
+          <li>JavaScript</li>
+          <li>Photoshop</li>
+        </ul>
+
+        <h4>Projetos</h4>
+        <ul id="previewProjects">
+          <li>Projeto 1</li>
+          <li>Projeto 2</li>
+          <li>Projeto 3</li>
+        </ul>
+
+        <h4>Contato</h4>
+        <p id="previewEmail">seuemail@email.com</p>
+        <p id="previewGithub">github.com/seuusuario</p>
+
+        <div class="mini">Esse site é meio estranho, mas funciona.</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function renderList(id, value) {
+      const lista = document.getElementById(id);
+      const itens = value.split(/\n|,/).map(x => x.trim()).filter(Boolean);
+      lista.innerHTML = itens.map(item => `<li>${item}</li>`).join("");
+    }
+
+    function atualizarPreview() {
+      document.getElementById("previewName").textContent = document.getElementById("name").value || "Seu Nome";
+      document.getElementById("previewTitle").innerHTML = `<strong>${document.getElementById("title").value || "Desenvolvedor Web"}</strong>`;
+      document.getElementById("previewAbout").textContent = document.getElementById("about").value || "Sem descrição";
+      renderList("previewSkills", document.getElementById("skills").value);
+      renderList("previewProjects", document.getElementById("projects").value);
+      document.getElementById("previewEmail").textContent = document.getElementById("email").value || "Sem e-mail";
+      document.getElementById("previewGithub").textContent = document.getElementById("github").value || "Sem GitHub";
+    }
+
+    document.querySelectorAll("input, textarea").forEach(el => {
+      el.addEventListener("input", atualizarPreview);
+    });
+
+    document.getElementById("themeBtn").addEventListener("click", function () {
+      document.body.classList.toggle("dark");
+      document.body.classList.toggle("light");
+    });
+
+    document.getElementById("clearBtn").addEventListener("click", function () {
+      document.getElementById("name").value = "";
+      document.getElementById("title").value = "";
+      document.getElementById("about").value = "";
+      document.getElementById("skills").value = "";
+      document.getElementById("projects").value = "";
+      document.getElementById("email").value = "";
+      document.getElementById("github").value = "";
+      atualizarPreview();
+    });
+
+    atualizarPreview();
+  </script>
+</body>
+</html>

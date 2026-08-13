@@ -1,0 +1,93 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: serif, Helvetica, sans-serif;
+}
+
+body {
+    flex-direction: column;
+    display: flex;
+    height: 100vh;
+}
+
+main {
+    height: fit-content;
+}
+
+header {
+    display: flex;
+    height: 250px;
+    background-color: #24053E;
+    color: white;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    position: relative;
+}
+
+header > span {
+    text-decoration: underline #4FF7A6;
+}
+
+header > h1 {
+    font-size: 2em;
+    max-width: 250px;
+}
+
+header > .botao {
+    font-size: 10px;
+    padding: 10px;
+    margin-top: 15px;
+    font-weight: 550;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #24053E;
+    background-color: #4FF7A6;
+    border: none;
+}
+
+nav > p > span {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 600;
+}
+
+nav {
+    position: absolute;
+    top: 5%;
+    left: 1%;
+}
+
+header > .botao2 {
+    color: white;
+    border: none;
+    background-color: transparent;
+    position: absolute;
+    top: 5%;
+    left: 90%;
+}
+
+header > .botao2 > span {
+    text-decoration: underline #4FF7A6;
+    font-size: 0.8em;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+header >  .foto {
+    width: 200px;
+    height: 150px;
+    position: absolute;
+    top: 75%;
+}
+
+header > .foto1 {
+    width: 140px;
+    position: absolute;
+    top: 10%;
+    left: -5%;
+}
+
+header > .foto2 {
+    width: 140px;
+    position: absolute;
+    top: 10%;
+    left: 90%;
+}

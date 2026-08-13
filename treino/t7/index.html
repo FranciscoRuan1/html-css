@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Criador de Portfólio</title>
+  <style>
+    :root {
+      --bg: linear-gradient(135deg, #eef4ff 0%, #f8fbff 100%);
+      --panel: rgba(255,255,255,0.95);
+      --panel-2: #ffffff;
+      --text: #11223d;
+      --muted: #6c7a90;
+      --accent: #4f7cff;
+      --accent-2: #32d2c3;
+      --border: rgba(17,34,61,0.1);
+      --shadow: 0 20px 50px rgba(17,34,61,0.12);
+    }
+
+    body.dark {
+      --bg: linear-gradient(135deg, #09111f 0%, #0f1d35 100%);
+      --panel: rgba(15,28,49,0.95);
+      --panel-2: #14253f;
+      --text: #f7fbff;
+      --muted: #99a8bf;
+      --accent: #7da2ff;
+      --accent-2: #58e4d0;
+      --border: rgba(255,255,255,0.12);
+      --shadow: 0 20px 50px rgba(0,0,0,0.35);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      padding: 24px;
+      transition: all 0.3s ease;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .hero {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .title {
+      font-size: 28px;
+      font-weight: 800;
+      margin: 0;
+    }
+
+    .subtitle {
+      color: var(--muted);
+      margin-top: 6px;
+    }
+
+    .btn-toggle {
+      border: none;
+      padding: 12px 16px;
+      border-radius: 999px;
+      font-weight: 700;
+      color: white;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      cursor: pointer;
+      box-shadow: var(--shadow);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 24px;
+    }
+
+    .card, .preview-card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      padding: 24px;
+      backdrop-filter: blur(14px);
+    }
+
+    form label {
+      display: block;
+      font-weight: 700;
+      margin-bottom: 6px;
+      margin-top: 12px;
+      color: var(--text);
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 13px 14px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: var(--panel-2);
+      color: var(--text);
+      outline: none;
+      font: inherit;
+    }
+
+    textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    input[type="color"] {
+      height: 48px;
+      padding: 4px;
+      cursor: pointer;
+    }
+
+    .input-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .actions {
+      display: flex;
+      gap: 12px;
+      margin-top: 18px;
+      flex-wrap: wrap;
+    }
+
+    button {
+      padding: 12px 16px;
+      border: none;
+      border-radius: 14px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: white;
+    }
+
+    .secondary {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    .preview-card {
+      padding: 28px;
+      min-height: 100%;
+    }
+
+    .preview-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .avatar {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      display: grid;
+      place-items: center;
+      color: white;
+      font-size: 24px;
+      font-weight: 700;
+    }
+
+    .preview-title {
+      font-size: 28px;
+      margin: 6px 0 4px;
+    }
+
+    .preview-role {
+      color: var(--accent);
+      font-weight: 700;
+      margin: 0;
+    }
+
+    .section {
+      margin-top: 18px;
+    }
+
+    .section h4 {
+      margin: 0 0 8px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .list {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+    }
+
+    .meta {
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(79, 124, 255, 0.12);
+      color: var(--accent);
+      font-weight: 700;
+      margin-top: 10px;
+    }
+
+    .preview-accent {
+      height: 8px;
+      border-radius: 999px;
+      margin-top: 16px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+    }
+
+    @media (max-width: 900px) {
+      .grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 520px) {
+      .input-row { grid-template-columns: 1fr; }
+      body { padding: 14px; }
+      .card, .preview-card { padding: 18px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="hero">
+      <div>
+        <h1 class="title">Criador de Portfólio</h1>
+        <p class="subtitle">Monte um perfil bonito, simples e funcional em poucos segundos.</p>
+      </div>
+      <button class="btn-toggle" id="themeBtn">🌗 Trocar tema</button>
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <form id="portfolioForm">
+          <div class="input-row">
+            <div>
+              <label for="name">Nome</label>
+              <input id="name" value="Ana Silva" />
+            </div>
+            <div>
+              <label for="role">Profissão</label>
+              <input id="role" value="Designer de Interfaces" />
+            </div>
+          </div>
+
+          <label for="bio">Resumo</label>
+          <textarea id="bio">Crio experiências digitais bonitas, claras e fáceis de usar.</textarea>
+
+          <label for="skills">Habilidades</label>
+          <textarea id="skills">UI/UX
+Design System
+HTML
+CSS</textarea>
+
+          <label for="projects">Projetos</label>
+          <textarea id="projects">Landing Page
+Dashboard
+Branding</textarea>
+
+          <div class="input-row">
+            <div>
+              <label for="color">Cor favorita</label>
+              <input id="color" type="color" value="#4f7cff" />
+            </div>
+            <div>
+              <label for="website">Site / Link</label>
+              <input id="website" value="meusite.com" />
+            </div>
+          </div>
+
+          <div class="actions">
+            <button type="button" class="primary" id="previewBtn">Atualizar</button>
+            <button type="button" class="secondary" id="clearBtn">Limpar</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="preview-card" id="preview">
+        <div class="preview-top">
+          <div>
+            <div class="badge">✨ Perfil pronto</div>
+            <h2 class="preview-title" id="previewName">Ana Silva</h2>
+            <p class="preview-role" id="previewRole">Designer de Interfaces</p>
+          </div>
+          <div class="avatar" id="previewInitials">AS</div>
+        </div>
+
+        <div class="section">
+          <h4>Sobre</h4>
+          <p class="meta" id="previewBio">Crio experiências digitais bonitas, claras e fáceis de usar.</p>
+        </div>
+
+        <div class="section">
+          <h4>Habilidades</h4>
+          <ul class="list" id="previewSkills"></ul>
+        </div>
+
+        <div class="section">
+          <h4>Projetos</h4>
+          <ul class="list" id="previewProjects"></ul>
+        </div>
+
+        <div class="section">
+          <h4>Contato</h4>
+          <p class="meta" id="previewWebsite">meusite.com</p>
+        </div>
+
+        <div class="preview-accent"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById("portfolioForm");
+    const themeBtn = document.getElementById("themeBtn");
+    const previewBtn = document.getElementById("previewBtn");
+    const clearBtn = document.getElementById("clearBtn");
+
+    function renderList(id, value) {
+      const list = document.getElementById(id);
+      const items = value.split(/\n|,/).map(x => x.trim()).filter(Boolean);
+      list.innerHTML = items.map(item => `<li>${item}</li>`).join("");
+    }
+
+    function atualizarPreview() {
+      const name = document.getElementById("name").value.trim() || "Seu Nome";
+      const role = document.getElementById("role").value.trim() || "Sua Profissão";
+      const bio = document.getElementById("bio").value.trim() || "Escreva algo sobre você.";
+      const skills = document.getElementById("skills").value;
+      const projects = document.getElementById("projects").value;
+      const website = document.getElementById("website").value.trim() || "seu-site.com";
+      const color = document.getElementById("color").value;
+
+      document.getElementById("previewName").textContent = name;
+      document.getElementById("previewRole").textContent = role;
+      document.getElementById("previewBio").textContent = bio;
+      document.getElementById("previewWebsite").textContent = website;
+
+      const initials = name.split(" ").filter(Boolean).slice(0, 2).map(p => p[0]).join("").toUpperCase() || "P";
+      document.getElementById("previewInitials").textContent = initials;
+
+      renderList("previewSkills", skills);
+      renderList("previewProjects", projects);
+
+      document.documentElement.style.setProperty("--accent", color);
+      document.documentElement.style.setProperty("--accent-2", color);
+
+      const preview = document.getElementById("preview");
+      preview.style.boxShadow = `0 22px 50px ${color}22`;
+      preview.style.border = `1px solid ${color}44`;
+
+      const accentBar = document.querySelector(".preview-accent");
+      accentBar.style.background = `linear-gradient(90deg, ${color}, ${color}99)`;
+
+      const badge = document.querySelector(".badge");
+      badge.style.background = `${color}20`;
+      badge.style.color = color;
+    }
+
+    form.addEventListener("input", atualizarPreview);
+    previewBtn.addEventListener("click", atualizarPreview);
+
+    clearBtn.addEventListener("click", () => {
+      document.getElementById("name").value = "";
+      document.getElementById("role").value = "";
+      document.getElementById("bio").value = "";
+      document.getElementById("skills").value = "";
+      document.getElementById("projects").value = "";
+      document.getElementById("website").value = "";
+      document.getElementById("color").value = "#4f7cff";
+      atualizarPreview();
+    });
+
+    themeBtn.addEventListener("click", () => {
+      document.body.classList.toggle("dark");
+    });
+
+    atualizarPreview();
+  </script>
+</body>
+</html>
