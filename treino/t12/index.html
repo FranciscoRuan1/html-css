@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <button id="botao">
+    </button>
+
+    <div id="caixa">
+
+    </div>
+    <div id="caixa1">
+
+    </div>
+
+    <script>
+        const botao = document.querySelector('#botao');
+botao.addEventListener('click', () => {
+    caixa.classList.toggle('clicada')
+    caixa1.classList.toggle('clicada1')
+})
+        const caixa = document.querySelector('#caixa');
+
+const caixa1 = document.querySelector('#caixa1');
+    </script>
+</body>
+</html>

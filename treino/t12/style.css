@@ -1,0 +1,48 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+div {
+    background-color: white;
+    height: 400px;
+    width: 500px;
+}
+
+#botao {
+    background-color: rgb(0, 255, 0);
+    height: 50px;
+    width: 50px;
+    border: none;
+    position: absolute;
+    z-index: 999;
+    border-radius: 50%;
+}
+
+#caixa1 {
+    background-color: red;
+}
+
+.clicada {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    transform: translate(600px, 0px) rotate(360deg);
+    transition: 1s;
+}
+
+.clicada1 {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    transform: translate(-600px, 0px) rotate(360deg);
+    transition: 1s;
+}
