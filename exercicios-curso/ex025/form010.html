@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>exemplo de formulario</h1>
+
+    <form action="cadastro.php" method="post" autocomplete="on">
+
+        <p>
+            <label for="ano">em que ano vc nasceu</label>
+            <input type="number" name="ano" id="ano" min="1900" max="2026" oninput="idade.innerHTML = Number(2026) - Number(ano.value)">
+        </p>
+
+        <p>
+            <label for="idade">sua idade é:</label>
+            <output id="idade">0</output>
+        </p>
+
+        <p>
+            <input type="submit" value="enviar">
+            <input type="reset" value="limpar">
+        </p>
+    </form>
+</body>
+</html>
