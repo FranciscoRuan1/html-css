@@ -1,0 +1,7 @@
+/* aparelho em pe */
+
+body {
+    background-image: url(../imagens/cev-portrait.jpg);
+    background-size: contain;
+    background-position: center bottom;
+}
