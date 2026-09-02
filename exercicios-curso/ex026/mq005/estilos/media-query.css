@@ -6,4 +6,12 @@
     menu {
         display: block;
     }
+
+    main > ul > li {
+        display: inline-block;
+    }
+
+    main {
+        width: 768px;
+    }
 }

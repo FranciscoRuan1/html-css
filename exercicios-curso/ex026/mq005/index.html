@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="estilos/style.css">
     <link rel="stylesheet" href="estilos/media-query.css">
 </head>
-<body>
+<body onresize="mudoutamanho()">
     <header>
         <h1>Meu site</h1>
         <span id="burguer" class="material-icons" onclick="clickmenu()">menu</span>
@@ -33,6 +33,15 @@
         </article>
     </main>
     <script>
+
+        function mudoutamanho() {
+            if (window.innerWidth >= 768) {
+                itens.style.display = 'block'
+            } else {
+                itens.style.display = 'none'
+            }
+        }
+
         function clickmenu() {
             if (itens.style.display == 'block') {
                 itens.style.display = 'none'
